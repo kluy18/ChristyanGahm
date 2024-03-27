@@ -8,10 +8,12 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func update(delta):
-	if Input.is_action_just_released("sprint"):
-		player.transition_state('walk')
-	if player.jump:
+	if not player.grounded:
+		player.transition_state('fall')
+	elif player.jump:
 		player.transition_state('jump')
+	elif Input.is_action_just_released("sprint"):
+		player.transition_state('walk')
 
 func transition():
 	pass

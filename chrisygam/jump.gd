@@ -8,9 +8,10 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func update(delta):
-	print('watr')
+	print('in jump')
 	if player.linear_velocity.y <= 0:
 		player.transition_state('fall')
+		print("falling?")
 
 func transition():
-	player.apply_impulse(Vector3.UP * 10)
+	player.apply_central_impulse(Vector3.UP * 15)

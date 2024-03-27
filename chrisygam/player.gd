@@ -26,10 +26,10 @@ var feet_collisions = []
 
 ##--- SPEED VARS ---##
 var walk_max_speed = 5.0
-var walk_accel = 1500.0
+var walk_accel = 2000.0
 
 var run_max_speed = 7.0
-var run_accel = 1750.0
+var run_accel = 2250.0
 
 var air_max_speed = 20
 var air_accel = 500
@@ -43,6 +43,7 @@ func _ready() -> void:
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	jump = Input.is_action_just_pressed("jump") && grounded
 	state_machine[current_state].update(delta)
 	##--- Player movement ---##
 	var input := Vector3.ZERO
@@ -70,8 +71,6 @@ func _process(delta: float) -> void:
 		linear_velocity.z = max_speed
 	elif linear_velocity.z < -max_speed:
 		linear_velocity.z = -max_speed
-	
-	jump = Input.is_action_just_pressed("jump") && grounded
 	
 	##--- Free Mouse on esc ---##
 	if Input.is_action_just_pressed("ui_cancel"):
@@ -106,8 +105,6 @@ func _process(delta: float) -> void:
 		moving_vertical = false
 	else:
 		moving_vertical = true
-		
-	print(linear_velocity)
 	
 func transition_state(new_state):
 	current_state = new_state
