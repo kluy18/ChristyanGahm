@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://cdrcxnlpww4hn"]
+[gd_scene load_steps=8 format=3 uid="uid://cdrcxnlpww4hn"]
 
 [ext_resource type="PackedScene" uid="uid://b0wotdpec438n" path="res://player.tscn" id="1_w6cma"]
+[ext_resource type="AudioStream" uid="uid://dno5kd2clhuov" path="res://Viking_Pirate_Stuff.wav" id="2_g7e2h"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_prxq4"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -42,3 +43,7 @@ shape = SubResource("ConcavePolygonShape3D_s7e4i")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.05158, 0)
 mass = 0.5
 gravity_scale = 1.4
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_g7e2h")
+autoplay = true
