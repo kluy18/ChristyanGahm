@@ -8,7 +8,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func update(delta):
-	if player.moving_horizontal:
+	if player.inputting_horizontal || player.moving_horizontal:
 		if Input.is_action_pressed("sprint"):
 			player.transition_state('run')
 		else:

@@ -1,23 +1,18 @@
 extends Node3D
 @onready var player := $"../.."
 
-var run_max_speed = 5.0
-var run_accel = 1750.0
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
 
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func update(delta):
-	if not player.grounded:
-		player.transition_state('fall')
-	elif player.jump:
-		player.transition_state('jump')
-	elif Input.is_action_just_released("sprint"):
+	if Input.is_action_pressed("sprint"):
+		player.transition_state('run')
+	elif player.moving_horizontal || player.inputting_horizontal:
 		player.transition_state('walk')
+	else:
+		player.transition_state('idle')
 
 func transition():
-	player.max_speed = run_max_speed
-	player.accel = run_accel
+	player.apply_impulse(Vector3(2*player.linear_velocity.x, 0, 2*player.linear_velocity.z))

@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://b0wotdpec438n"]
+[gd_scene load_steps=16 format=3 uid="uid://b0wotdpec438n"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_rijp7"]
 [ext_resource type="Script" path="res://idle.gd" id="2_beik1"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://jump.gd" id="5_owpp3"]
 [ext_resource type="Script" path="res://fall.gd" id="6_nlq3r"]
 [ext_resource type="Script" path="res://label_3d.gd" id="7_10xti"]
+[ext_resource type="Script" path="res://land.gd" id="7_kthuh"]
 [ext_resource type="PackedScene" uid="uid://cs2u4jel7tl5r" path="res://Walking.fbx" id="8_7gndt"]
 [ext_resource type="Script" path="res://kaya.gd" id="9_sx5du"]
 
@@ -78,6 +79,9 @@ script = ExtResource("5_owpp3")
 [node name="fall" type="Node3D" parent="state"]
 script = ExtResource("6_nlq3r")
 
+[node name="land" type="Node3D" parent="state"]
+script = ExtResource("7_kthuh")
+
 [node name="Feet" type="Area3D" parent="."]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Feet"]
@@ -94,6 +98,10 @@ script = ExtResource("7_10xti")
 [node name="Walking" parent="." instance=ExtResource("8_7gndt")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.955797, 0)
 script = ExtResource("9_sx5du")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_entered" from="Feet" to="." method="_on_feet_body_entered"]

@@ -10,6 +10,7 @@ extends RigidBody3D
 	'run' = $state/run,
 	'jump' = $state/jump,
 	'fall' = $state/fall,
+	'land' = $state/land,
 }
 var current_state := 'idle';
 var states_stack = []
@@ -17,25 +18,22 @@ var states_stack = []
 var mouse_sensitivity := .001
 var twist_input := 0.0
 var pitch_input := 0.0
+var look_basis = 0
 
 var grounded := false
 var jump := false
+
 var moving_horizontal := false
+var inputting_horizontal := false
 var moving_vertical := false
+
 var feet_collisions = []
 
+var input := Vector3.ZERO
+
 ##--- SPEED VARS ---##
-var walk_max_speed = 5.0
-var walk_accel = 2000.0
-
-var run_max_speed = 7.0
-var run_accel = 2250.0
-
-var air_max_speed = 20
-var air_accel = 500
-
-var max_speed = walk_max_speed
-var accel = walk_accel
+var max_speed = 0
+var accel = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -43,24 +41,23 @@ func _ready() -> void:
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	jump = Input.is_action_just_pressed("jump") && grounded
-	state_machine[current_state].update(delta)
-	##--- Player movement ---##
-	var input := Vector3.ZERO
-	
-	if current_state == 'run':
-		max_speed = run_max_speed
-		accel = run_accel
-	elif not grounded:
-		max_speed = air_max_speed
-		accel = air_accel
+	if grounded:
+		linear_damp = 3
 	else:
-		max_speed = walk_max_speed
-		accel = walk_accel
+		linear_damp = 1.5
+	jump = Input.is_action_just_pressed("jump") && grounded
+	
+	##--- Player movement ---##
+	input = Vector3.ZERO
 		
 	input.x = Input.get_axis("left", "right")
 	input.z = Input.get_axis("up", "down")
-	apply_central_force(twist_pivot.basis * input * accel * delta)
+	
+	state_machine[current_state].update(delta)
+	if not Input.is_action_pressed('pan'):
+		look_basis = twist_pivot.basis
+	
+	apply_central_force(look_basis * input * accel * delta)
 	
 	if linear_velocity.x > max_speed:
 		linear_velocity.x = max_speed
@@ -100,6 +97,11 @@ func _process(delta: float) -> void:
 		moving_horizontal = false
 	else:
 		moving_horizontal = true
+	
+	if abs(input.x) > 0 || abs(input.z) > 0:
+		inputting_horizontal = true
+	else:
+		inputting_horizontal = false
 		
 	if abs(linear_velocity.y) < .005:
 		moving_vertical = false
