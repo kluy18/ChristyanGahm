@@ -9,9 +9,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func update(delta):
-	if Input.is_action_pressed("crouch"):
-		player.transition_state("crouch")
-	elif not player.crouch:
+	if not player.crouch:
 		player.transition_state("idle")
 
 func transition():

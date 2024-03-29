@@ -47,8 +47,10 @@ func _process(delta: float) -> void:
 		linear_damp = 3
 	else:
 		linear_damp = 1.5
+		
 	jump = Input.is_action_just_pressed("jump") && grounded
-	#crouch = Input.is_action_just_pressed("crouch") && grounded
+	
+	crouch = Input.is_action_pressed("crouch") && grounded
 			
 	##--- Player movement ---##
 	input = Vector3.ZERO
