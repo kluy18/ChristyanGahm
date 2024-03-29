@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://b0wotdpec438n"]
+[gd_scene load_steps=17 format=3 uid="uid://b0wotdpec438n"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_rijp7"]
 [ext_resource type="Script" path="res://idle.gd" id="2_beik1"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://label_3d.gd" id="7_10xti"]
 [ext_resource type="Script" path="res://land.gd" id="7_kthuh"]
 [ext_resource type="PackedScene" uid="uid://cs2u4jel7tl5r" path="res://Walking.fbx" id="8_7gndt"]
+[ext_resource type="Script" path="res://crouch.gd" id="8_q8kfb"]
 [ext_resource type="Script" path="res://kaya.gd" id="9_sx5du"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_iu4ny"]
@@ -81,6 +82,9 @@ script = ExtResource("6_nlq3r")
 
 [node name="land" type="Node3D" parent="state"]
 script = ExtResource("7_kthuh")
+
+[node name="crouch" type="Node3D" parent="state"]
+script = ExtResource("8_q8kfb")
 
 [node name="Feet" type="Area3D" parent="."]
 

@@ -15,7 +15,7 @@ func update(delta):
 		player.transition_state('fall')
 	elif player.jump:
 		player.transition_state('jump')
-	elif Input.is_action_just_released("sprint"):
+	elif Input.is_action_just_released("sprint") or Input.is_action_just_released("crouch"):
 		player.transition_state('walk')
 
 func transition():

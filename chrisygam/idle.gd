@@ -15,6 +15,8 @@ func update(delta):
 			player.transition_state('walk')
 	if player.jump:
 		player.transition_state('jump')
+	if player.crouch:
+		player.transition_state('crouch')
 
 func transition():
 	pass

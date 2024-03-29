@@ -11,6 +11,7 @@ extends RigidBody3D
 	'jump' = $state/jump,
 	'fall' = $state/fall,
 	'land' = $state/land,
+	'crouch' = $state/crouch,
 }
 var current_state := 'idle';
 var states_stack = []
@@ -22,6 +23,7 @@ var look_basis = 0
 
 var grounded := false
 var jump := false
+var crouch := false
 
 var moving_horizontal := false
 var inputting_horizontal := false
@@ -46,7 +48,8 @@ func _process(delta: float) -> void:
 	else:
 		linear_damp = 1.5
 	jump = Input.is_action_just_pressed("jump") && grounded
-	
+	#crouch = Input.is_action_just_pressed("crouch") && grounded
+			
 	##--- Player movement ---##
 	input = Vector3.ZERO
 		

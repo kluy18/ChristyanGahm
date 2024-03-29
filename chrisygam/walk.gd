@@ -16,8 +16,11 @@ func update(delta):
 		player.transition_state('idle')
 	elif Input.is_action_pressed("sprint"):
 		player.transition_state('run')
+	elif Input.is_action_pressed("crouch"):
+		player.transition_state('crouch')
 	if player.jump:
 		player.transition_state('jump')
+	
 
 func transition():
 	player.max_speed = walk_max_speed
