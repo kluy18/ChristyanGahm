@@ -62,6 +62,7 @@ func _process(delta: float) -> void:
 	
 	apply_central_force(look_basis * input * accel * delta)
 	
+	##--- idk how this works ---##
 	if Vector3(linear_velocity.x, 0, linear_velocity.z).length() > max_speed:
 		var temp = Vector3(linear_velocity.x, linear_velocity.y, linear_velocity.z).normalized() * (max_speed - .001)
 		linear_velocity.x = temp.x
