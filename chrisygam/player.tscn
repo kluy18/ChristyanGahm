@@ -13,6 +13,7 @@
 [ext_resource type="Script" path="res://kaya.gd" id="9_sx5du"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_iu4ny"]
+friction = 0.2
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_mwgvg"]
 
@@ -42,8 +43,8 @@ top_level = true
 mass = 1.4
 physics_material_override = SubResource("PhysicsMaterial_iu4ny")
 lock_rotation = true
+continuous_cd = true
 contact_monitor = true
-linear_damp = 3.0
 script = ExtResource("1_rijp7")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]

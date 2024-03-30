@@ -15,4 +15,4 @@ func update(delta):
 		player.transition_state('idle')
 
 func transition():
-	player.apply_impulse(Vector3(2*player.linear_velocity.x, 0, 2*player.linear_velocity.z))
+	player.gravity_scale = 2.8

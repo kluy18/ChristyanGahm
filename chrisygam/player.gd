@@ -34,8 +34,8 @@ var feet_collisions = []
 var input := Vector3.ZERO
 
 ##--- SPEED VARS ---##
-var max_speed = 0
-var accel = 0
+var max_speed := 3
+var accel := 2250
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -44,12 +44,11 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if grounded:
-		linear_damp = 3
+		linear_damp = 5
 	else:
-		linear_damp = 1.5
+		linear_damp = 0.5
 		
 	jump = Input.is_action_just_pressed("jump") && grounded
-	
 	crouch = Input.is_action_pressed("crouch") && grounded
 			
 	##--- Player movement ---##
@@ -58,21 +57,18 @@ func _process(delta: float) -> void:
 	input.x = Input.get_axis("left", "right")
 	input.z = Input.get_axis("up", "down")
 	
-	state_machine[current_state].update(delta)
 	if not Input.is_action_pressed('pan'):
 		look_basis = twist_pivot.basis
 	
 	apply_central_force(look_basis * input * accel * delta)
 	
-	if linear_velocity.x > max_speed:
-		linear_velocity.x = max_speed
-	elif linear_velocity.x < -max_speed:
-		linear_velocity.x = -max_speed
-		
-	if linear_velocity.z > max_speed:
-		linear_velocity.z = max_speed
-	elif linear_velocity.z < -max_speed:
-		linear_velocity.z = -max_speed
+	if Vector3(linear_velocity.x, 0, linear_velocity.z).length() > max_speed:
+		var temp = Vector3(linear_velocity.x, linear_velocity.y, linear_velocity.z).normalized() * (max_speed - .001)
+		linear_velocity.x = temp.x
+		linear_velocity.y = temp.y
+		linear_velocity.z = temp.z
+
+	state_machine[current_state].update(delta)
 	
 	##--- Free Mouse on esc ---##
 	if Input.is_action_just_pressed("ui_cancel"):
