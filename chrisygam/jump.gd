@@ -2,8 +2,8 @@ extends Node3D
 @onready var player := $"../.."
 @onready var feet := $"../../Feet"
 @onready var timer := $"../../Timer"
-var jump_max_speed = 10
-var jump_accel = 400
+var jump_max_speed = 6
+var jump_accel = 1000
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -18,7 +18,8 @@ func update(delta):
 			player.transition_state('land')
 
 func transition():
+	player.apply_impulse(Vector3.UP * 5)
+	player.gravity_scale = 2.2
 	player.max_speed = jump_max_speed
 	player.accel = jump_accel
-	player.apply_central_impulse(Vector3.UP * 5)
 	timer.start(.2)

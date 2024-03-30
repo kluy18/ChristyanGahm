@@ -1,7 +1,7 @@
 extends Node3D
 @onready var player := $"../.."
 var walk_max_speed = 3.0
-var walk_accel = 1500.0
+var walk_accel = 2250
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -18,7 +18,7 @@ func update(delta):
 		player.transition_state('run')
 	elif Input.is_action_pressed("crouch"):
 		player.transition_state('crouch')
-	if player.jump:
+	elif player.jump:
 		player.transition_state('jump')
 	
 
