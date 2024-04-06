@@ -1,0 +1,40 @@
+[gd_scene load_steps=7 format=3 uid="uid://cdrcxnlpww4hn"]
+
+[ext_resource type="PackedScene" uid="uid://b0wotdpec438n" path="res://player.tscn" id="1_w6cma"]
+[ext_resource type="AudioStream" uid="uid://dno5kd2clhuov" path="res://Viking_Pirate_Stuff.wav" id="2_g7e2h"]
+[ext_resource type="PackedScene" uid="uid://dh53d47swakoe" path="res://fake_island.tscn" id="3_3i8gw"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_prxq4"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_8yngu"]
+sky_material = SubResource("ProceduralSkyMaterial_prxq4")
+
+[sub_resource type="Environment" id="Environment_x3hg5"]
+background_mode = 2
+sky = SubResource("Sky_8yngu")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="TestWorld" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_x3hg5")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Player" parent="." instance=ExtResource("1_w6cma")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.767926, 0)
+mass = 0.5
+gravity_scale = 0.5
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_g7e2h")
+volume_db = -17.57
+autoplay = true
+
+[node name="FakeIsland" parent="." instance=ExtResource("3_3i8gw")]
+transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, -4.57259, 0)

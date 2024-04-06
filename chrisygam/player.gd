@@ -3,6 +3,7 @@ extends RigidBody3D
 @onready var twist_pivot := $TwistPivot
 @onready var pitch_pivot := $TwistPivot/PitchPivot
 @onready var collision_shape := $CollisionShape3D
+@onready var mesh := $MeshInstance3D
 
 @onready var state_machine = {
 	'idle' = $state/idle,
@@ -20,6 +21,7 @@ var mouse_sensitivity := .001
 var twist_input := 0.0
 var pitch_input := 0.0
 var look_basis = 0
+var moving_direction := 0.0
 
 var grounded := false
 var jump := false
@@ -108,6 +110,9 @@ func _process(delta: float) -> void:
 		moving_vertical = false
 	else:
 		moving_vertical = true
+	
+	if moving_horizontal:
+		mesh.rotation.y = lerp_angle(mesh.rotation.y, atan2(linear_velocity.x, linear_velocity.z), delta*linear_damp*2)
 	
 func transition_state(new_state):
 	current_state = new_state

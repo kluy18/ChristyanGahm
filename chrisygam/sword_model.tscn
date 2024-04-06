@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=3 uid="uid://dgg3wio32allv"]
+
+[ext_resource type="PackedScene" uid="uid://b2fisa28ymdqn" path="res://Sword.glb" id="1_38pvg"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_h0avi"]
+size = Vector3(0.0636597, 3.39661, 0.256592)
+
+[node name="Sword" instance=ExtResource("1_38pvg")]
+transform = Transform3D(-1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 0, 1.55549, 0)
+
+[node name="Cube" parent="." index="0"]
+transform = Transform3D(-0.0107681, 0, 0, 0, 1.70197, 0, 0, 0, 0.105416, 0, -0.468, 0)
+
+[node name="Cube_001" parent="." index="1"]
+transform = Transform3D(0.0427114, 0, 0, 0, 0.0427114, 0, 0, 0, 0.0427114, 0, 1.268, 0)
+
+[node name="Cylinder" parent="." index="2"]
+transform = Transform3D(0.0407901, 0, 0, 0, 0.0407901, 0, 0, 0, 0.0407901, 0, 1.348, 0)
+
+[node name="Cone" parent="." index="3"]
+transform = Transform3D(0.0707376, 0, 0, 0, -0.0707376, -1.06811e-08, 0, 1.06811e-08, -0.0707376, 0, 1.832, 0)
+
+[node name="CollisionShape3D" type="Area3D" parent="." index="4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00155439, -0.48969, 0.00424194)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CollisionShape3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0071106, 0.000671387, -0.00671387)
+shape = SubResource("BoxShape3D_h0avi")

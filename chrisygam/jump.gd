@@ -3,7 +3,7 @@ extends Node3D
 @onready var feet := $"../../Feet"
 @onready var timer := $"../../Timer"
 var jump_max_speed = 6
-var jump_accel = 1000
+var jump_accel = 800
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

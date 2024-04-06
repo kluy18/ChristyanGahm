@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://cvx8uqf31qavj"]
+
+[ext_resource type="PackedScene" uid="uid://dgg3wio32allv" path="res://sword_model.tscn" id="1_46gex"]
+
+[node name="ExecutionerSword" type="Node3D"]
+
+[node name="WeaponTemplate" type="Node3D" parent="."]
+
+[node name="Sword" parent="WeaponTemplate" instance=ExtResource("1_46gex")]

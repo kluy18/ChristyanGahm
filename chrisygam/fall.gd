@@ -1,7 +1,7 @@
 extends Node3D
 @onready var player := $"../.."
 var fall_max_speed = 6
-var fall_accel = 1000
+var fall_accel = 800
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
